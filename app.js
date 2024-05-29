@@ -85,7 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
       "how can this help": "This can help you gain insights into your personal growth, set goals, and develop a habit of self-reflection.",
       "is it my friend": "Yes, Reflective Buddy is designed to be a friendly companion that supports your journey to self-awareness.",
       "can i get better": "Absolutely! Regular self-reflection can help you identify areas for improvement and track your progress.",
-      "is this a therapist": "Reflective Buddy is not a therapist but a tool to help you reflect on your experiences. For professional help, it's important to consult a licensed therapist."
+      "is this a therapist": "Reflective Buddy is not a therapist but a tool to help you reflect on your experiences. For professional help, it's important to consult a licensed therapist.",
+      "what is companionship": "Companionship refers to the feeling of fellowship or friendship. Reflective Buddy helps foster a sense of companionship through regular, meaningful conversations.",
+      "how to humanize companionship": "To humanize companionship, focus on empathy, active listening, and genuine interest in others' experiences and emotions. Reflective Buddy encourages these qualities.",
+      "how to build empathy-driven relationships": "Empathy-driven relationships are built on understanding, compassion, and mutual respect. Reflective Buddy promotes these values through reflective questions and thoughtful dialogue.",
+      "how to avoid loneliness": "Avoiding loneliness involves fostering connections, engaging in meaningful activities, and reflecting on your feelings. Reflective Buddy can help by providing regular, introspective conversations."
     };
 
     const userMessage = document.createElement('div');
