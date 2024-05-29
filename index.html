@@ -8,8 +8,16 @@
 </head>
 <body>
   <header>
+    <img src="Create_an_attractive_logo_for_'Reflective_Buddy',_.png" alt="Reflective Buddy Logo" class="logo">
     <h1>Reflective Guide</h1>
     <p>Your journey to self-discovery and personal growth starts here.</p>
+    <div id="summary">
+      <h2>What is Reflective Buddy?</h2>
+      <p>Reflective Buddy is your personal companion chatbot that helps you enhance self-awareness through weekly reflective questions. Every week, you will receive a series of questions designed to encourage introspection and personal growth. Diligently answer these questions and open yourself to the companion to make the most out of this experience.</p>
+    </div>
+    <div id="current-week">
+      <h2>Current Week: <span id="week-number"></span></h2>
+    </div>
   </header>
 
   <main>
@@ -34,10 +42,18 @@
 
     <section id="schedule">
       <h2>Schedule Your Interactive Session</h2>
-      <p>Chat with your true companion (The most interesting and important person)</p>
+      <p>Chat with your true companion (The most interesting and important person). Take 30 minutes to reflect, engage, and grow. Let's explore your thoughts and aspirations together in a mindful and meaningful way.</p>
       <form id="schedule-form">
-        <label for="session-date">Choose a date:</label>
-        <input type="date" id="session-date" name="session-date" required>
+        <label for="session-day">Choose a day:</label>
+        <select id="session-day" name="session-day" required>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
         <label for="session-time">Choose a time:</label>
         <input type="time" id="session-time" name="session-time" required>
         <button type="submit">Schedule Session</button>
@@ -53,6 +69,15 @@
   <footer>
     <p>&copy; 2024 Reflective Guide. All rights reserved.</p>
   </footer>
+
+  <div id="chatbot">
+    <div id="chat-header">Ask Reflective Buddy</div>
+    <div id="chat-body">
+      <div id="chat-messages"></div>
+      <input type="text" id="chat-input" placeholder="Ask how the chatbot works..." />
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

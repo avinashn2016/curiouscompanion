@@ -1,14 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');  // Import the cors package
 const twilio = require('twilio');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());  // Enable CORS for all routes
 
-const accountSid = 'ACbd631c374b3297176fd08b9e59744a8d';
-const authToken = '664453c32c9140d438f94d844a1b6076';
+const accountSid = 'ACbd631c374b3297176fd08b9e59744a8d';  // Replace with your Twilio Account SID
+const authToken = '664453c32c9140d438f94d844a1b6076';  // Replace with your Twilio Auth Token
 const client = new twilio(accountSid, authToken);
 
 const questions = [
@@ -22,24 +20,15 @@ const questions = [
 app.post('/send-sms', (req, res) => {
   const phoneNumber = req.body.phoneNumber;
 
-  const sendMessages = async () => {
-    try {
-      for (const question of questions) {
-        const message = await client.messages.create({
-          body: question,
-          to: `+${phoneNumber}`,  // Ensure the number includes the country code
-          from: '+19796763971'  // Your Twilio phone number in E.164 format
-        });
-        console.log('Message sent:', message.sid);
-      }
-      res.status(200).send('Questions sent!');
-    } catch (error) {
-      console.error('Error sending messages:', error);
-      res.status(500).send('Failed to send questions');
-    }
-  };
+  questions.forEach(question => {
+    client.messages.create({
+      body: question,
+      to: `+${phoneNumber}`,  // Ensure the number includes the country code
+      from: '+19796763971'  // Your Twilio phone number in E.164 format
+    }).then(message => console.log(message.sid)).catch(error => console.error(error));
+  });
 
-  sendMessages();
+  res.send('Questions sent!');
 });
 
 app.listen(3000, () => {
