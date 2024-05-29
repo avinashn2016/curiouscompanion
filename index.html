@@ -8,8 +8,23 @@
 </head>
 <body>
   <header>
+    <img src="logo.png" alt="Reflective Buddy Logo" class="logo">
     <h1>Reflective Guide</h1>
     <p>Your journey to self-discovery and personal growth starts here.</p>
+    <div id="summary">
+      <h2>What is Reflective Buddy?</h2>
+      <p>Reflective Buddy is your personal companion chatbot that helps you enhance self-awareness through weekly reflective questions. Every week, you will receive a series of questions designed to encourage introspection and personal growth. Diligently answer these questions and open yourself to the companion to make the most out of this experience.</p>
+    </div>
+    <div id="current-week">
+      <h2>Week <span id="week-number"></span> of <span id="current-year"></span></h2>
+    </div>
+    <div id="current-date-time"></div>
+    <div id="appointment-details" style="display:none;">
+      <h3>Next Session</h3>
+      <p id="appointment-info"></p>
+      <button id="send-email">Send Email</button>
+      <button id="add-to-calendar">Add to Google Calendar</button>
+    </div>
   </header>
 
   <main>
@@ -19,7 +34,7 @@
       </div>
     </section>
 
-    <section id="questions">
+    <section id="questions" style="display:none;">
       <h2>This Week's Reflective Questions</h2>
       <div id="question-container"></div>
     </section>
@@ -27,32 +42,68 @@
     <section id="signup">
       <h2>Activate Reflective Buddy</h2>
       <form id="signup-form">
+        <input type="text" id="userName" name="userName" placeholder="Enter your name" required>
         <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number with country code" required>
-        <button type="submit">Activate</button>
+        <button type="submit">Send Verification Code</button>
       </form>
+      <form id="verify-form" style="display:none;">
+        <input type="text" id="verificationCode" name="verificationCode" placeholder="Enter the verification code" required>
+        <button type="submit">Verify</button>
+      </form>
+    </section>
+
+    <section id="mood-tracker">
+      <h2>Weekly Mood Tracker</h2>
+      <form id="mood-form">
+        <label for="mood">How are you feeling this week?</label>
+        <input type="range" id="mood" name="mood" min="1" max="5" step="1">
+        <div id="mood-emoji">😊</div>
+        <button type="submit">Log Mood</button>
+      </form>
+      <div id="mood-log"></div>
     </section>
 
     <section id="schedule">
       <h2>Schedule Your Interactive Session</h2>
-      <p>Chat with your true companion (The most interesting and important person)</p>
+      <p>Chat with your true companion (The most interesting and important person). Take 30 minutes to reflect, engage, and grow. Let's explore your thoughts and aspirations together in a mindful and meaningful way.</p>
       <form id="schedule-form">
-        <label for="session-date">Choose a date:</label>
-        <input type="date" id="session-date" name="session-date" required>
+        <label for="session-day">Choose a day:</label>
+        <select id="session-day" name="session-day" required>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
         <label for="session-time">Choose a time:</label>
         <input type="time" id="session-time" name="session-time" required>
         <button type="submit">Schedule Session</button>
       </form>
     </section>
 
-    <section id="book">
+    <section id="Book">
       <h2>Embedded Book</h2>
-      <iframe src="book.pdf" width="100%" height="600px"></iframe>
+      <iframe src="Book.pdf" width="100%" height="600px"></iframe>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2024 Reflective Guide. All rights reserved.</p>
   </footer>
+
+  <div id="chatbot">
+    <div id="chat-header">Ask Reflective Buddy</div>
+    <div id="chat-body">
+      <div id="chat-messages"></div>
+      <input type="text" id="chat-input" placeholder="Ask how the chatbot works..." />
+      <button id="chat-send">Send</button>
+      <div id="typing-indicator" class="typing-indicator">Reflective Buddy is typing...</div>
+    </div>
+  </div>
+
+  <button id="chat-toggle">Chat</button>
 
   <script src="app.js"></script>
 </body>
