@@ -36,7 +36,7 @@ h2 {
   color: #66fcf1;
 }
 
-#summary, #current-week {
+#summary, #current-week, #current-date-time {
   background-color: #0b0c10;
   padding: 1rem;
   border-radius: 5px;
@@ -65,12 +65,40 @@ h2 {
 }
 
 #signup-form,
-#schedule-form {
+#verify-form,
+#schedule-form,
+#mood-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   max-width: 400px;
   margin: 0 auto;
+}
+
+#mood-log {
+  margin-top: 1rem;
+  background-color: #0b0c10;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #c5c6c7;
+  max-width: 400px;
+  margin: 1rem auto;
+}
+
+#mood-emoji {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#inspirational-quote {
+  background-color: #0b0c10;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #c5c6c7;
+  max-width: 600px;
+  margin: 1rem auto;
+  text-align: center;
 }
 
 .video-container {
