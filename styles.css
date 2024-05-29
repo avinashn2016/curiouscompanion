@@ -148,6 +148,22 @@ footer {
   background-color: #1f2833;
 }
 
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #45a29e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#chat-toggle:hover {
+  background-color: #1f2833;
+}
+
 .user-message {
   background-color: #45a29e;
   color: white;
