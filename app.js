@@ -118,11 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start the initial chatbot interaction
         startChat();
       } else {
-        alert('Verification failed. Please try again.');
+        alert('If you did not receive the verification text message, contact your twilio admin to upgrade your free account or check the phone number again.');
       }
     }).catch(error => {
       console.error('Error:', error);
-      alert('Verification failed. Please try again.');
+      alert('If you did not receive the verification text message, contact your twilio admin to upgrade your free account or check the phone number again.');
     });
   });
 
