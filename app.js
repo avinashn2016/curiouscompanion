@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatToggle = document.getElementById('chat-toggle');
   const chatBody = document.getElementById('chatbot');
   const chatHeader = document.getElementById('chat-header');
+  const typingIndicator = document.getElementById('typing-indicator');
 
   setTimeout(() => {
     chatBody.style.display = 'block';
@@ -97,14 +98,22 @@ document.addEventListener('DOMContentLoaded', function() {
     userMessage.classList.add('user-message');
 
     const botResponse = responses[chatInput] || "I'm here to help! Please ask questions related to Reflective Buddy.";
-    const botMessage = document.createElement('div');
-    botMessage.textContent = botResponse;
-    botMessage.classList.add('bot-message');
 
     chatOutput.appendChild(userMessage);
-    chatOutput.appendChild(botMessage);
+    typingIndicator.style.display = 'block';
+
+    setTimeout(() => {
+      typingIndicator.style.display = 'none';
+
+      const botMessage = document.createElement('div');
+      botMessage.textContent = botResponse;
+      botMessage.classList.add('bot-message');
+
+      chatOutput.appendChild(botMessage);
+      chatOutput.scrollTop = chatOutput.scrollHeight;
+    }, 1000);
+
     document.getElementById('chat-input').value = "";
-    chatOutput.scrollTop = chatOutput.scrollHeight;
   });
 
   function getCurrentWeekNumber() {
