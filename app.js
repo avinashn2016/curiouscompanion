@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
         verifyForm.style.display = 'block';
         alert('Verification code sent! Check your phone.');
       } else {
-        alert('Failed to send verification code. Please try again.');
+        alert('If you did not receive a short code to the number mentioned, it might be an issue on your side or your free twilio verify account needs upgrade. Please try again.');
       }
     }).catch(error => {
       console.error('Error:', error);
-      alert('Failed to send verification code. Please try again.');
+      alert('If you did not receive a short code to the number mentioned, it might be an issue on your side or your free twilio verify account needs upgrade. Please try again.');
     });
   });
 
