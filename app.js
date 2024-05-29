@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const currentWeekElement = document.getElementById('week-number');
   const currentYearElement = document.getElementById('current-year');
   const currentDateTimeElement = document.getElementById('current-date-time');
+  const appointmentDetailsElement = document.getElementById('appointment-details');
+  const appointmentInfoElement = document.getElementById('appointment-info');
+  const sendEmailButton = document.getElementById('send-email');
+  const addToCalendarButton = document.getElementById('add-to-calendar');
+
   const currentYear = new Date().getFullYear();
   const currentDate = new Date().toLocaleDateString();
   const currentTime = new Date().toLocaleTimeString();
@@ -92,11 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
         verifyForm.style.display = 'block';
         alert('Verification code sent! Check your phone.');
       } else {
-        alert('If you did not receive a short code to the number mentioned, it might be an issue on your side or your free twilio verify account needs upgrade. Please try again.');
+        alert('Failed to send verification code. Please try again.');
       }
     }).catch(error => {
       console.error('Error:', error);
-      alert('If you did not receive a short code to the number mentioned, it might be an issue on your side or your free twilio verify account needs upgrade. Please try again.');
+      alert('Failed to send verification code. Please try again.');
     });
   });
 
@@ -118,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start the initial chatbot interaction
         startChat();
       } else {
-        alert('If you did not receive the verification text message, contact your twilio admin to upgrade your free account or check the phone number again.');
+        alert('Verification failed. Please try again.');
       }
     }).catch(error => {
       console.error('Error:', error);
-      alert('If you did not receive the verification text message, contact your twilio admin to upgrade your free account or check the phone number again.');
+      alert('Verification failed. Please try again.');
     });
   });
 
@@ -373,6 +378,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
     return uniqueQuestions.slice(0, 5);
   }
+
+  // Calendly event listeners for scheduling sessions
+  window.addEventListener('message', function(e) {
+    if (e.data.event && e.data.event.indexOf('calendly') === 0) {
+      if (e.data.event === 'calendly.event_scheduled') {
+        const eventDetails = e.data.payload.event;
+        const eventTime = new Date(eventDetails.start_time).toLocaleString();
+        appointmentInfoElement.textContent = `${userName}, your next session is scheduled for ${eventTime}`;
+        appointmentDetailsElement.style.display = 'block';
+      }
+    }
+  });
+
+  // Email and Calendar Integration
+  sendEmailButton.addEventListener('click', function() {
+    const emailBody = encodeURIComponent(`Hi ${userName},\n\nThis is a reminder for your upcoming Reflective Buddy session on ${appointmentInfoElement.textContent}.\n\nBest regards,\nReflective Buddy Team`);
+    window.location.href = `mailto:${userName}@example.com?subject=Reflective Buddy Session Reminder&body=${emailBody}`;
+  });
+
+  addToCalendarButton.addEventListener('click', function() {
+    const event = {
+      summary: 'Reflective Buddy Session',
+      location: 'Online',
+      description: 'Reflective Buddy session to enhance self-awareness and personal growth.',
+      start: {
+        dateTime: new Date(appointmentInfoElement.textContent.split(' for ')[1]).toISOString(),
+        timeZone: 'America/Los_Angeles'
+      },
+      end: {
+        dateTime: new Date(new Date(appointmentInfoElement.textContent.split(' for ')[1]).getTime() + 30 * 60 * 1000).toISOString(),
+        timeZone: 'America/Los_Angeles'
+      }
+    };
+
+    const gapi = window.gapi;
+    gapi.load('client:auth2', () => {
+      gapi.auth2.init({ client_id: 'YOUR_GOOGLE_CLIENT_ID' }).then(() => {
+        gapi.client.load('calendar', 'v3', () => {
+          const request = gapi.client.calendar.events.insert({
+            calendarId: 'primary',
+            resource: event
+          });
+
+          request.execute((event) => {
+            alert('Event created: ' + event.htmlLink);
+          });
+        });
+      });
+    });
+  });
 
   // Display Daily Inspirational Quote
   const quoteElement = document.getElementById('quote');
