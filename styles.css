@@ -165,6 +165,12 @@ footer {
   background-color: #1f2833;
 }
 
+.typing-indicator {
+  display: none;
+  font-style: italic;
+  color: #c5c6c7;
+}
+
 .user-message {
   background-color: #45a29e;
   color: white;
