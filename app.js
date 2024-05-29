@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const chatToggle = document.getElementById('chat-toggle');
   const chatBody = document.getElementById('chatbot');
+  const chatHeader = document.getElementById('chat-header');
+
   setTimeout(() => {
     chatBody.style.display = 'block';
   }, 5000);
@@ -65,11 +67,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  chatHeader.addEventListener('click', function() {
+    if (chatBody.style.display === 'none' || chatBody.style.display === '') {
+      chatBody.style.display = 'block';
+    } else {
+      chatBody.style.display = 'none';
+    }
+  });
+
   document.getElementById('chat-send').addEventListener('click', function() {
     const chatInput = document.getElementById('chat-input').value.toLowerCase();
     const chatOutput = document.getElementById('chat-messages');
 
-    // Mock responses for demo purposes
     const responses = {
       "how does the chatbot work": "Reflective Buddy helps you by providing weekly questions designed to enhance your self-awareness. You can activate it by entering your phone number and scheduling interactive sessions.",
       "what will i learn from this": "You will learn to reflect on your weekly accomplishments, challenges, and growth areas, enhancing your self-awareness and personal development.",
@@ -91,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatOutput.appendChild(userMessage);
     chatOutput.appendChild(botMessage);
     document.getElementById('chat-input').value = "";
-    chatOutput.scrollTop = chatOutput.scrollHeight; // Scroll to the bottom
+    chatOutput.scrollTop = chatOutput.scrollHeight;
   });
 
   function getCurrentWeekNumber() {
