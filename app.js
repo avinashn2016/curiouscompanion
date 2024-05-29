@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start the initial chatbot interaction
         startChat();
       } else {
-        alert('Verification failed. Please try again.');
+        alert('Verification failed, check your twilio trial account credits. Please try again.');
       }
     }).catch(error => {
       console.error('Error:', error);
-      alert('Verification failed. Please try again.');
+      alert('Verification failed. Check with twilio trial account credits. Please try again.');
     });
   });
 
